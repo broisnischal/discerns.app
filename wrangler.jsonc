@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tanstarter",
+  "compatibility_date": "2026-04-22",
+  "routes": ["shop.lexicon.website/*", "www.shop.lexicon.website/*", "shop.lexicon.website"],
+  "preview_urls": true,
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "vars": {
+    "VITE_BASE_URL": "https://shop.lexicon.website/",
+    "BETTER_AUTH_SECRET": "4+Vt5VlDWgCJQfVVg7Miu98zH8Qen2QFniiDGz+QF0Y=",
+    "GITHUB_CLIENT_ID": "",
+    "GITHUB_CLIENT_SECRET": "",
+    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_CLIENT_SECRET": "",
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+    },
+  },
+  "d1_databases": [
+    {
+      "binding": "bmark",
+      "database_name": "bmark",
+      "database_id": "18a49258-5fe4-41db-8a05-d82794641dd9",
+      "remote": true,
+    },
+  ],
+  "ai": {
+    "binding": "AI",
+  },
+}

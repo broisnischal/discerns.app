@@ -1,0 +1,44 @@
+# Agent Guidelines
+
+## Essentials
+
+- Stack: TypeScript + React (TanStack Start), with Drizzle ORM, shadcn/ui, and Better Auth.
+- Use shadcn CLI (`bun run ui add <component>`) for adding new UI components & primitives.
+- Use `lucide-react` for UI icons (use `Icon` suffix, e.g. `import { Loader2Icon } from "lucide-react"`); for brand icons use `@icons-pack/react-simple-icons` (e.g. `SiGithub`).
+- Don't build after every little change. If `bun run lint` passes; assume changes work.
+
+## Topic-specific Guidelines
+
+- [TanStack patterns](.agents/tanstack-patterns.md) - Routing, data fetching, loaders, server functions, environment shaking
+- [Auth patterns](.agents/auth.md) - Route guards, middleware, auth utilities
+- [TypeScript conventions](.agents/typescript.md) - Casting rules, prefer type inference
+- [Workflow](.agents/workflow.md) - Workflow commands, validation approach
+
+<!-- intent-skills:start -->
+
+# Skill mappings - when working in these areas, load the linked skill file into context.
+
+skills:
+
+- task: "general TanStack Router and @tanstack/react-router docs for routes, layouts, route tree, and navigation"
+  load: "node_modules/@tanstack/react-router/dist/llms/index.js"
+- task: "general TanStack Start and @tanstack/react-start docs for app structure, patterns, and server features"
+load: "node_modules/@tanstack/react-start/skills/react-start/SKILL.md"
+<!-- intent-skills:end -->
+
+## TanStack Docs
+
+Use `bun run tanstack` (which runs `bunx @tanstack/cli@latest` via `package.json`) to look up TanStack documentation. Always pass `--json` for machine-readable output.
+
+```bash
+# List TanStack libraries (optionally filter by --group state|headlessUI|performance|tooling)
+bun run tanstack libraries --json
+
+# Fetch a specific doc page
+bun run tanstack doc router framework/react/guide/data-loading --json
+bun run tanstack doc query framework/react/overview --docs-version v5 --json
+
+# Search docs (optionally filter by --library, --framework, --limit)
+bun run tanstack search-docs "server functions" --library start --json
+bun run tanstack search-docs "loaders" --library router --framework react --json
+```
