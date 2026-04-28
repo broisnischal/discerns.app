@@ -23,6 +23,14 @@
   ],
   "preview_urls": true,
   "compatibility_flags": ["nodejs_compat"],
+  /**
+   * Paid Workers only — raises per-request CPU (default ~30s on paid vs ~10ms on free).
+   * Free tier cannot raise this; fix 1102 there = reduce Worker CPU (see root devtools prod exclusion).
+   */
+  "limits": {
+    "cpu_ms": 30000,
+    // "subrequests": 100,
+  },
   "main": "@tanstack/react-start/server-entry",
   "vars": {
     "VITE_BASE_URL": "https://shop.lexicon.website/",

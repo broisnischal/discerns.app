@@ -1,11 +1,8 @@
-import { a11yDevtoolsPlugin } from "@tanstack/devtools-a11y/react";
-import { TanStackDevtools } from "@tanstack/react-devtools";
 import { HotkeysProvider } from "@tanstack/react-hotkeys";
 import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import { createRootRouteWithContext, HeadContent, Scripts } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
+import * as React from "react";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -55,6 +52,23 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   shellComponent: RootDocument,
 });
 
+const LazyRootDevtools = import.meta.env.DEV
+  ? React.lazy(() =>
+      import("@/components/root-devtools").then((m) => ({ default: m.RootDevtools })),
+    )
+  : null;
+
+function RootDevtoolsIsland() {
+  if (!import.meta.env.DEV || !LazyRootDevtools) {
+    return null;
+  }
+  return (
+    <React.Suspense fallback={null}>
+      <LazyRootDevtools />
+    </React.Suspense>
+  );
+}
+
 function RootDocument({ children }: { readonly children: React.ReactNode }) {
   return (
     // suppress since we're updating the "dark" class in ThemeProvider
@@ -77,19 +91,7 @@ function RootDocument({ children }: { readonly children: React.ReactNode }) {
           <Toaster />
         </ThemeProvider>
 
-        <TanStackDevtools
-          plugins={[
-            {
-              name: "TanStack Query",
-              render: <ReactQueryDevtoolsPanel />,
-            },
-            {
-              name: "TanStack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            a11yDevtoolsPlugin(),
-          ]}
-        />
+        <RootDevtoolsIsland />
 
         <Scripts />
       </body>

@@ -7,6 +7,8 @@ import { inngestFunctions } from "@/lib/inngest/functions";
 const inngestHandler = serve({
   client: inngest,
   functions: inngestFunctions,
+  /** Helps Inngest Cloud register the correct path behind Workers / custom hosts. */
+  servePath: "/api/inngest",
 });
 
 export const Route = createFileRoute("/api/inngest")({

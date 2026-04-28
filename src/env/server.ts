@@ -5,7 +5,8 @@ export const env = createEnv({
   server: {
     VITE_BASE_URL: z.url().default("http://localhost:3000"),
     BETTER_AUTH_SECRET: z.string().min(1),
-    UPLOADTHING_TOKEN: z.string().min(1),
+    /** Optional: omit on Workers until set via `wrangler secret put UPLOADTHING_TOKEN` (upload routes return 503 without it). */
+    UPLOADTHING_TOKEN: z.string().min(1).optional(),
 
     // OAuth2 providers, optional, update as needed
     GITHUB_CLIENT_ID: z.string().optional(),
