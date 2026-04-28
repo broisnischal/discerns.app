@@ -83,7 +83,7 @@ function AppLayout() {
 
   const reportBug = () => {
     window.open(
-      "https://github.com/broisnischal/usemark/issues/new?template=bug_report.yml",
+      "https://github.com/broisnischal/discerns.app/issues/new?template=bug_report.yml",
       "_blank",
       "noopener,noreferrer",
     );

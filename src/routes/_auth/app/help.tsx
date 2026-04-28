@@ -3,9 +3,9 @@ import { BugIcon, ExternalLinkIcon, LifeBuoyIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-const GITHUB_ISSUES_URL = "https://github.com/broisnischal/usemark/issues";
+const GITHUB_ISSUES_URL = "https://github.com/broisnischal/discerns.app/issues";
 const GITHUB_NEW_BUG_URL =
-  "https://github.com/broisnischal/usemark/issues/new?template=bug_report.yml";
+  "https://github.com/broisnischal/discerns.app/issues/new?template=bug_report.yml";
 
 export const Route = createFileRoute("/_auth/app/help")({
   component: HelpSupportPage,
