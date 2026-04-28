@@ -1515,6 +1515,7 @@ export async function syncRssBookmarkFolder(
         added: 0,
         bookmarkIds: [] as string[],
         deferredItems: [],
+        error: `RSS fetch failed with status ${response.status}.`,
       };
     }
 
@@ -1526,6 +1527,7 @@ export async function syncRssBookmarkFolder(
       added: 0,
       bookmarkIds: [] as string[],
       deferredItems: [],
+      error: "Could not fetch RSS feed.",
     };
   }
   const existingSourceItemIds = await listExistingSourceItemIdsForFolder(
@@ -1642,7 +1644,10 @@ export async function pruneRssBookmarksForFolder(
           eq(bookmark.saveForLater, false),
           eq(bookmark.isImportant, false),
           eq(bookmark.visibility, "private"),
-          lte(bookmark.createdAt, retentionCutoff),
+          // RSS rows may carry the original article publish date in `createdAt`.
+          // Prune by row freshness instead, so newly imported historical posts are not
+          // deleted immediately on first sync.
+          lte(bookmark.updatedAt, retentionCutoff),
         ),
       )
       .limit(RSS_INSERT_CHUNK_SIZE);
@@ -1670,7 +1675,9 @@ export async function pruneRssBookmarksForFolder(
           eq(bookmark.visibility, "private"),
         ),
       )
-      .orderBy(desc(bookmark.createdAt))
+      // Keep the most recently imported/updated RSS rows, not necessarily
+      // the newest article publish dates.
+      .orderBy(desc(bookmark.updatedAt))
       .limit(keepRecentCount + RSS_INSERT_CHUNK_SIZE);
 
     const overflowIds = orderedUnsavedRssIds.slice(keepRecentCount).map((row) => row.id);

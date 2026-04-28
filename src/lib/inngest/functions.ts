@@ -187,10 +187,12 @@ export const rssFolderSyncRequested = inngest.createFunction(
           data: {
             userId: result.userId,
             sourceFolderId: folderId,
-            items: result.deferredItems.map((item) => ({
-              ...item,
-              createdAt: typeof item.createdAt === "string" ? item.createdAt : undefined,
-            })),
+            items: result.deferredItems
+              .filter((item): item is NonNullable<typeof item> => item != null)
+              .map((item) => ({
+                ...item,
+                createdAt: typeof item.createdAt === "string" ? item.createdAt : undefined,
+              })),
           },
         });
       });

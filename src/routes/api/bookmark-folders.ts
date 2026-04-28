@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { auth } from "@/lib/auth/auth";
 import {
+  createBookmarksBatchForUser,
   createBookmarkFolderForUser,
   deleteBookmarkFolderForUser,
   fetchRssChannelName,
@@ -85,13 +86,34 @@ async function runImmediateRssSync(folderId: string) {
 
 async function runRssSyncFastAndQueue(folderId: string) {
   const result = await runImmediateRssSync(folderId);
+  let queued = 0;
+  let importedDeferredNow = 0;
+  let queueFailed = false;
+
   try {
     await queueBookmarkIndexEvents(result.bookmarkIds);
     await queueDeferredImportEvent(result.userId, folderId, result.deferredItems);
+    queued = result.deferredItems.length;
   } catch {
-    // Avoid request-time heavy fallbacks in Worker runtime.
+    // Fallback so users still get the full RSS import even if queue/event publish fails.
+    queueFailed = true;
+    if (result.userId && result.deferredItems.length > 0) {
+      const fallbackImport = await createBookmarksBatchForUser(
+        result.userId,
+        result.deferredItems,
+        {
+          dedupeByUrlAndFolder: true,
+        },
+      );
+      importedDeferredNow = fallbackImport.createdIds.length;
+      try {
+        await queueBookmarkIndexEvents(fallbackImport.createdIds);
+      } catch {
+        // Non-fatal; bookmarks are still imported.
+      }
+    }
   }
-  return result;
+  return { ...result, queued, importedDeferredNow, queueFailed };
 }
 
 async function runImmediateGitHubSync(folderId: string) {
@@ -223,7 +245,16 @@ export const Route = createFileRoute("/api/bookmark-folders")({
         });
 
         if (folder.sourceType === "rss") {
-          await runRssSyncFastAndQueue(folder.id);
+          const syncResult = await runRssSyncFastAndQueue(folder.id);
+          return Response.json(
+            {
+              ...folder,
+              importedNow: syncResult.added + syncResult.importedDeferredNow,
+              queued: syncResult.queued,
+              queueFailed: syncResult.queueFailed,
+            },
+            { status: 201 },
+          );
         }
 
         if (folder.sourceType === "github") {
@@ -289,8 +320,9 @@ export const Route = createFileRoute("/api/bookmark-folders")({
               success: true,
               id: folderId,
               sourceType: folder.sourceType,
-              importedNow: result.added,
-              queued: result.deferredItems.length,
+              importedNow: result.added + result.importedDeferredNow,
+              queued: result.queued,
+              queueFailed: result.queueFailed,
             });
           }
 
