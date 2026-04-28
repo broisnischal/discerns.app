@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
+import { AppLogo } from "@/components/app-logo";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -94,10 +95,10 @@ function AppLayout() {
         <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-6 px-4 sm:gap-8 sm:px-6">
           <Link
             to="/app"
-            className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border/80 bg-card text-sm font-semibold shadow-sm shadow-foreground/5 transition-colors hover:bg-muted/60"
-            aria-label="UseMarks home"
+            className="shrink-0 transition-colors hover:opacity-85"
+            aria-label="Discerns home"
           >
-            U
+            <AppLogo className="size-9" />
           </Link>
 
           <nav
@@ -242,7 +243,7 @@ function AppLayout() {
               Terms
             </Link>
           </nav>
-          <p className="text-center text-xs text-muted-foreground sm:text-left">UseMarks</p>
+          <p className="text-center text-xs text-muted-foreground sm:text-left">Discerns</p>
         </div>
       </footer>
     </div>

@@ -207,7 +207,7 @@ async function fetchYoutubeMetadata(url: string) {
         cache: "no-store",
         headers: {
           Accept: "application/json",
-          "User-Agent": "UseMarkBot/1.0 (+bookmark metadata)",
+          "User-Agent": "DiscernsBot/1.0 (+bookmark metadata)",
         },
       },
     );
@@ -239,7 +239,7 @@ async function fetchHtmlMetadata(url: string) {
     redirect: "follow",
     signal: controller.signal,
     headers: {
-      "User-Agent": "UseMarkBot/1.0 (+bookmark metadata)",
+      "User-Agent": "DiscernsBot/1.0 (+bookmark metadata)",
     },
   });
   clearTimeout(timeout);

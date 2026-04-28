@@ -31,7 +31,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "UseMark",
+        title: "Discerns | Use links",
       },
       {
         name: "description",
@@ -40,10 +40,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
     links: [
-      // Replace with your icons here, or remove if you have a favicon.ico in public/
       {
         rel: "icon",
-        href: "https://mugnavo.com/favicon.ico",
+        href: "/favicon-light.png?v=3",
+      },
+      {
+        rel: "shortcut icon",
+        href: "/favicon-light.png?v=3",
       },
       { rel: "stylesheet", href: appCss },
     ],
@@ -58,7 +61,7 @@ const LazyRootDevtools = import.meta.env.DEV
   : null;
 
 function RootDevtoolsIsland() {
-  if (!import.meta.env.DEV || !LazyRootDevtools) {
+  if (!import.meta.env.DEV || !LazyRootDevtools || typeof window === "undefined") {
     return null;
   }
   return (

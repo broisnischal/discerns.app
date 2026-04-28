@@ -55,6 +55,7 @@ interface CreateBookmarkInput {
   note?: string;
   folder?: string;
   category?: string;
+  dedupeByUrlAndFolder?: boolean;
 }
 
 interface CreateBookmarksBatchInput {
@@ -260,7 +261,7 @@ export async function fetchRssChannelName(feedUrl: string) {
     cache: "no-store",
     headers: {
       Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml",
-      "User-Agent": "UseMarkBot/1.0 (+live folder discovery)",
+      "User-Agent": "DiscernsBot/1.0 (+live folder discovery)",
     },
   });
 
@@ -810,7 +811,7 @@ export async function createBookmarkForUser(userId: string, data: CreateBookmark
   if (normalizedContent.contentType === "link" && userPreferences?.utmEnabled) {
     try {
       const parsed = new URL(url);
-      const utmSource = userPreferences.utmSource?.trim() || "usemark";
+      const utmSource = userPreferences.utmSource?.trim() || "discerns";
       parsed.searchParams.set("utm_source", utmSource);
       parsed.searchParams.set("utm_medium", "bookmark");
       parsed.searchParams.set("utm_campaign", "saved");
@@ -836,6 +837,21 @@ export async function createBookmarkForUser(userId: string, data: CreateBookmark
     folderId: folder.id,
     embeddingStatus: "pending",
   } satisfies typeof bookmark.$inferInsert;
+
+  if (data.dedupeByUrlAndFolder !== false) {
+    const existing = await db
+      .select({ id: bookmark.id })
+      .from(bookmark)
+      .where(
+        and(eq(bookmark.userId, userId), eq(bookmark.folderId, folder.id), eq(bookmark.url, url)),
+      )
+      .limit(1)
+      .then((rows) => rows[0]);
+
+    if (existing?.id) {
+      return { id: existing.id };
+    }
+  }
 
   try {
     await db.insert(bookmark).values(record);
@@ -1488,7 +1504,7 @@ export async function syncRssBookmarkFolder(
       cache: "no-store",
       headers: {
         Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml",
-        "User-Agent": "UseMarkBot/1.0 (+live folder sync)",
+        "User-Agent": "DiscernsBot/1.0 (+live folder sync)",
       },
     });
 

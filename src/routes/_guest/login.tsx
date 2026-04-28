@@ -1,9 +1,10 @@
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GalleryVerticalEndIcon, LoaderCircleIcon } from "lucide-react";
+import { LoaderCircleIcon } from "lucide-react";
 import { toast } from "sonner";
 
+import { AppLogo } from "@/components/app-logo";
 import { SignInSocialButton } from "@/components/sign-in-social-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,12 +58,10 @@ function LoginForm() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
             <Link to="/" className="flex flex-col items-center gap-2 font-medium">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md">
-                <GalleryVerticalEndIcon className="size-6" />
-              </div>
-              <span className="sr-only">Acme Inc.</span>
+              <AppLogo className="size-8" iconClassName="size-4.5" />
+              <span className="sr-only">Discerns</span>
             </Link>
-            <h1 className="text-xl font-bold">Welcome back to Acme Inc.</h1>
+            <h1 className="text-xl font-bold">Welcome back to Discerns</h1>
           </div>
           <div className="flex flex-col gap-5">
             <div className="grid gap-2">
@@ -105,8 +104,7 @@ function LoginForm() {
             <SignInSocialButton
               provider="google"
               callbackURL={redirectUrl}
-              // disabled={isPending}
-              disabled={true} // TODO disabled just for the preview deployment at https://tanstarter.mugnavo.com
+              disabled={isPending}
               icon={<SiGoogle className="size-4" />}
             />
           </div>

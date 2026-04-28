@@ -3341,12 +3341,12 @@ function AppIndex() {
         ? searchQuery.isLoading
         : bookmarksQuery.isLoading;
   const isRefreshingRows = isXFolderSelected
-    ? xBookmarksQuery.isFetching
+    ? xBookmarksQuery.isRefetching
     : isGitHubStarsViewSelected
-      ? githubStarsQuery.isFetching
+      ? githubStarsQuery.isRefetching
       : search.trim() && searchMode === "semantic"
-        ? searchQuery.isFetching
-        : bookmarksQuery.isFetching;
+        ? searchQuery.isRefetching
+        : bookmarksQuery.isRefetching;
   const rowPaginationScope = [
     isXFolderSelected ? "x" : isGitHubStarsViewSelected ? "github-stars" : "bookmarks",
     activeFolderId ?? "all",

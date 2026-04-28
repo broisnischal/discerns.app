@@ -256,7 +256,7 @@ function ProfilePage() {
         body: JSON.stringify({
           action: "update-utm-settings",
           utmEnabled: payload.utmEnabled,
-          utmSource: payload.utmSource.trim() || "usemark",
+          utmSource: payload.utmSource.trim() || "discerns",
         }),
       });
       if (!response.ok) {
@@ -428,7 +428,7 @@ function ProfilePage() {
 
   const canDelete = deleteConfirmation.trim().toLowerCase() === profile.user.email.toLowerCase();
   const effectiveUtmEnabled = utmDraft?.enabled ?? profile.preferences.utmEnabled;
-  const effectiveUtmSource = utmDraft?.source ?? (profile.preferences.utmSource || "usemark");
+  const effectiveUtmSource = utmDraft?.source ?? (profile.preferences.utmSource || "discerns");
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 pt-6 pb-12">
@@ -853,7 +853,7 @@ function ProfilePage() {
                       source: event.target.value,
                     }))
                   }
-                  placeholder="usemark"
+                  placeholder="discerns"
                   className="h-10 max-w-md rounded-lg"
                 />
                 <Button
@@ -862,7 +862,7 @@ function ProfilePage() {
                   onClick={() =>
                     saveUtmSettingsMutation.mutate({
                       utmEnabled: effectiveUtmEnabled,
-                      utmSource: effectiveUtmSource.trim() || "usemark",
+                      utmSource: effectiveUtmSource.trim() || "discerns",
                     })
                   }
                 >
@@ -875,7 +875,9 @@ function ProfilePage() {
               </div>
               <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
                 Example:{" "}
-                <code className="rounded bg-background/80 px-1 font-mono">?utm_source=usemark</code>
+                <code className="rounded bg-background/80 px-1 font-mono">
+                  ?utm_source=discerns
+                </code>
               </p>
             </div>
           </CardContent>

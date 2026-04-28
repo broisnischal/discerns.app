@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "UseMark — Calm bookmarking",
+        title: "Discerns | Use links",
       },
       {
         name: "description",
@@ -82,7 +82,7 @@ function HomePage() {
             to="/"
             className="text-sm font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80"
           >
-            UseMark
+            Discerns
           </Link>
           <nav className="flex items-center gap-1 sm:gap-2">
             <Link to="/terms" className={buttonVariants({ variant: "ghost", size: "sm" })}>
@@ -112,8 +112,8 @@ function HomePage() {
               Save links. Follow feeds. Find things fast.
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
-              UseMark keeps bookmarking simple: clean folders, fast search, live RSS feeds, and a UI
-              that stays out of your way.
+              Discerns keeps bookmarking simple: clean folders, fast search, live RSS feeds, and a
+              UI that stays out of your way.
             </p>
             <div
               className="mt-3 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
@@ -193,7 +193,7 @@ function HomePage() {
               to="/app"
               className={cn(buttonVariants({ variant: "default", size: "lg" }), "gap-2")}
             >
-              Open UseMark
+              Open Discerns
               <ArrowUpRightIcon className="size-4" />
             </Link>
           </div>
@@ -203,9 +203,9 @@ function HomePage() {
       <footer className="border-t border-border/60 bg-muted/10 px-4 py-8 sm:px-6">
         <div className="mx-auto grid w-full max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <p className="text-sm font-medium tracking-tight text-foreground">UseMark</p>
+            <p className="text-sm font-medium tracking-tight text-foreground">Discerns</p>
             <p className="mt-1 max-w-xs text-xs text-muted-foreground">
-              © {new Date().getFullYear()} UseMark. Calm bookmarking for daily use.
+              © {new Date().getFullYear()} Discerns. Calm bookmarking for daily use.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2 sm:justify-start lg:justify-center">

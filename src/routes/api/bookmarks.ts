@@ -142,6 +142,7 @@ export const Route = createFileRoute("/api/bookmarks")({
           url: payload.url ?? "",
           note: payload.note ?? "",
           folder: payload.folder ?? payload.category ?? "default",
+          dedupeByUrlAndFolder: shouldDedupe,
         });
 
         // Queue background embedding/indexing through Inngest.

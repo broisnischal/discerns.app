@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "UseMark — Terms & Conditions" },
+      { title: "Discerns | Terms & Conditions" },
       {
         name: "description",
         content:
-          "Terms and conditions for UseMark covering account usage, acceptable conduct, intellectual property, and service limits.",
+          "Terms and conditions for Discerns covering account usage, acceptable conduct, intellectual property, and service limits.",
       },
     ],
   }),
@@ -22,7 +22,7 @@ const sections = [
   {
     title: "1. Acceptance of Terms",
     content:
-      "By creating an account or using UseMark, you agree to these terms and all applicable laws. If you do not agree, do not use the service.",
+      "By creating an account or using Discerns, you agree to these terms and all applicable laws. If you do not agree, do not use the service.",
   },
   {
     title: "2. Accounts and Access",
@@ -32,27 +32,27 @@ const sections = [
   {
     title: "3. Acceptable Use",
     content:
-      "You agree not to use UseMark for unlawful content, abuse third-party integrations, attempt unauthorized access, or interfere with service stability.",
+      "You agree not to use Discerns for unlawful content, abuse third-party integrations, attempt unauthorized access, or interfere with service stability.",
   },
   {
     title: "4. User Content",
     content:
-      "You retain ownership of links, notes, and metadata you save. You grant UseMark permission to process this data only to provide and improve product features.",
+      "You retain ownership of links, notes, and metadata you save. You grant Discerns permission to process this data only to provide and improve product features.",
   },
   {
     title: "5. Third-Party Services",
     content:
-      "Some functionality relies on external services (such as RSS sources, GitHub, or other providers). Availability and behavior of those services are outside UseMark's control.",
+      "Some functionality relies on external services (such as RSS sources, GitHub, or other providers). Availability and behavior of those services are outside Discerns control.",
   },
   {
     title: "6. Service Availability",
     content:
-      "UseMark is provided on an as-is basis. Features may change, be suspended, or be removed as the product evolves.",
+      "Discerns is provided on an as-is basis. Features may change, be suspended, or be removed as the product evolves.",
   },
   {
     title: "7. Limitation of Liability",
     content:
-      "To the fullest extent permitted by law, UseMark is not liable for indirect, incidental, or consequential damages resulting from service use or interruption.",
+      "To the fullest extent permitted by law, Discerns is not liable for indirect, incidental, or consequential damages resulting from service use or interruption.",
   },
   {
     title: "8. Termination",
@@ -86,7 +86,7 @@ function TermsPage() {
             </h1>
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            These terms govern your use of UseMark and related features. This page provides a
+            These terms govern your use of Discerns and related features. This page provides a
             plain-language framework for product usage and responsibilities.
           </p>
         </section>

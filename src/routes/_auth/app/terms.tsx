@@ -11,7 +11,7 @@ function TermsConditionsPage() {
       <div className="mb-6">
         <h2 className="text-xl font-semibold tracking-tight">Terms & Conditions</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Basic usage terms for UseMark. Replace this with your final legal copy before production.
+          Basic usage terms for Discerns. Replace this with your final legal copy before production.
         </p>
       </div>
 

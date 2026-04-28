@@ -77,7 +77,7 @@ export const Route = createFileRoute("/api/profile")({
           user: session.user,
           preferences: {
             utmEnabled: Boolean(userPreferences?.utmEnabled),
-            utmSource: userPreferences?.utmSource?.trim() || "usemark",
+            utmSource: userPreferences?.utmSource?.trim() || "discerns",
           },
           connections: {
             accounts: accounts.map((item) => ({
@@ -132,7 +132,7 @@ export const Route = createFileRoute("/api/profile")({
           return Response.json({ error: "Unsupported action." }, { status: 400 });
         }
 
-        const utmSource = payload.utmSource?.trim() || "usemark";
+        const utmSource = payload.utmSource?.trim() || "discerns";
         await db
           .update(user)
           .set({

@@ -17,7 +17,7 @@ import {
 
 export const Route = createFileRoute("/_auth/app/feeds")({
   head: () => ({
-    meta: [{ title: "Feeds — UseMark" }],
+    meta: [{ title: "Discerns | Feeds" }],
   }),
   component: FeedsPage,
 });

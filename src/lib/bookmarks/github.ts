@@ -107,7 +107,7 @@ async function fetchGitHub<TResponse>(url: string, accessToken: string) {
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${accessToken}`,
-      "User-Agent": "UseMarkBot/1.0",
+      "User-Agent": "DiscernsBot/1.0",
       "X-GitHub-Api-Version": "2022-11-28",
     },
   });

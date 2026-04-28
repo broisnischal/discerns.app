@@ -66,7 +66,9 @@ function formatBookmarkContext(rows: BookmarkRecord[]) {
         `tag: ${row.tag}`,
         `folder: ${row.folderName}`,
         `saved_at: ${toDateLabel(row.createdAt)}`,
-      ].filter(Boolean).join("\n");
+      ]
+        .filter(Boolean)
+        .join("\n");
     })
     .join("\n\n");
 }
@@ -139,7 +141,7 @@ export async function askBookmarksForUser(
   }
 
   const systemPrompt = [
-    "You are UseMark Assistant.",
+    "You are Discerns Assistant.",
     "Answer only using the bookmark context provided.",
     "If context is insufficient, clearly say you are not sure.",
     "Keep the answer concise and practical.",
