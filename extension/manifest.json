@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest",
+  "manifest_version": 3,
+  "name": "Bookmark Tab Saver",
+  "version": "0.0.1",
+  "description": "Save tabs and links from the right-click menu.",
+  "action": {
+    "default_title": "Bookmark Tab Saver",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_page": "src/options/options.html",
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "permissions": ["contextMenus", "tabs", "storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

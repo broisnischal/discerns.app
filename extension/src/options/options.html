@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmark Extension Settings</title>
+  </head>
+  <body style="font-family: sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px">
+    <h1>Bookmark Extension Settings</h1>
+    <p>
+      Set your deployed app URL. The extension will call <code>/api/bookmarks</code> on this host
+      using your existing login session.
+    </p>
+
+    <label for="apiBaseUrl" style="display: block; font-weight: 600; margin-top: 12px"
+      >API Base URL</label
+    >
+    <input
+      id="apiBaseUrl"
+      type="url"
+      placeholder="https://your-app.com"
+      style="width: 100%; padding: 8px; margin-top: 8px; box-sizing: border-box"
+    />
+
+    <button id="saveButton" style="margin-top: 12px; padding: 8px 12px">Save</button>
+    <p id="status" style="margin-top: 10px"></p>
+
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>
