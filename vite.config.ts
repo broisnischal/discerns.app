@@ -25,7 +25,8 @@ export default defineConfig(({ mode }) => {
       // Router plugin rewrites `routeTree.gen.ts`; watching that file can cause reload/HMR churn
       // and worsen intermittent SSR TDZ errors (see TanStack Router #6775, #5673).
       watch: {
-        ignored: ["**/routeTree.gen.ts"],
+        // Extension is a separate package (`extension/` + its own vite/tsconfig); keep it out of the app dev graph.
+        ignored: ["**/routeTree.gen.ts", "**/extension/**"],
       },
     },
     plugins: [

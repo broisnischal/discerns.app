@@ -59,6 +59,7 @@
     "react-hooks-js/void-use-memo": "error"
   },
   "ignorePatterns": [
+    "extension/**",
     "dist",
     ".wrangler",
     ".vercel",

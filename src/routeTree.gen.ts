@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ErrorRouteImport } from './routes/error'
 import { Route as GuestRouteRouteImport } from './routes/_guest/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -41,6 +42,11 @@ import { Route as AuthAppFeedsRouteImport } from './routes/_auth/app/feeds'
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ErrorRoute = ErrorRouteImport.update({
+  id: '/error',
+  path: '/error',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuestRouteRoute = GuestRouteRouteImport.update({
@@ -180,6 +186,7 @@ const AuthAppFeedsRoute = AuthAppFeedsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/terms': typeof TermsRoute
   '/app': typeof AuthAppRouteRouteWithChildren
   '/login': typeof GuestLoginRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/terms': typeof TermsRoute
   '/login': typeof GuestLoginRoute
   '/signup': typeof GuestSignupRoute
@@ -238,6 +246,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_guest': typeof GuestRouteRouteWithChildren
+  '/error': typeof ErrorRoute
   '/terms': typeof TermsRoute
   '/_auth/app': typeof AuthAppRouteRouteWithChildren
   '/_guest/login': typeof GuestLoginRoute
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/error'
     | '/terms'
     | '/app'
     | '/login'
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/error'
     | '/terms'
     | '/login'
     | '/signup'
@@ -325,6 +336,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_guest'
+    | '/error'
     | '/terms'
     | '/_auth/app'
     | '/_guest/login'
@@ -356,6 +368,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   GuestRouteRoute: typeof GuestRouteRouteWithChildren
+  ErrorRoute: typeof ErrorRoute
   TermsRoute: typeof TermsRoute
   ApiBookmarkFoldersRoute: typeof ApiBookmarkFoldersRouteWithChildren
   ApiBookmarksRoute: typeof ApiBookmarksRouteWithChildren
@@ -378,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/error': {
+      id: '/error'
+      path: '/error'
+      fullPath: '/error'
+      preLoaderRoute: typeof ErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_guest': {
@@ -649,6 +669,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   GuestRouteRoute: GuestRouteRouteWithChildren,
+  ErrorRoute: ErrorRoute,
   TermsRoute: TermsRoute,
   ApiBookmarkFoldersRoute: ApiBookmarkFoldersRouteWithChildren,
   ApiBookmarksRoute: ApiBookmarksRouteWithChildren,

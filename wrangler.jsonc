@@ -25,7 +25,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
   "vars": {
-    "VITE_BASE_URL": "https://discerns.app/",
+    "VITE_BASE_URL": "https://discerns.app",
   },
   "observability": {
     "logs": {
